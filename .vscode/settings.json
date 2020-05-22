@@ -1,0 +1,5 @@
+{
+  "editor.renderIndentGuides": false,
+  "editor.renderWhitespace": "boundary",
+  "typescript.preferences.quoteStyle": "single"
+}

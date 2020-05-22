@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions';
-import { Track } from '../types';
+import { Track } from './types';
 
 export const tracksRequest = createAction('TRACKS_REQUEST')();
 export const tracksResponse = createAction('TRACKS_RESPONSE')<Track[]>();
