@@ -1,44 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Decomposition
 
-## Available Scripts
+[ ] * Build Layout (header aside main)
+[ ] * main 
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+SPA. React.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+По городу развешены громкоговорители. Каждый из них может проигрывать одновременно несколько аудиодорожек с разной громкостью. Например, из всех динамиков района играет фоном одна и та же музыка, а если рядом с громкоговорителем есть достопримечательность, то там ещё диктор читает текст про неё. Для каждого динамика можно задать индивидуальную громкость каждого трека. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Нужно сделать интерфейс управления этим делом.
 
-### `yarn test`
+Есть фонотека: список треков. Каждый трек можно проиграть. У каждого трека одна настройка: дефолтная громкость. Нужно показывать количество динамиков, на которые трек назначен.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Есть карта, где точками обозначены динамики. Около каждого динамика — количество треков, которые он проигрывает. Динамики можно выделять — простым кликом (выделяется один), с шифтом (выделяется несколько), рисованием прямоугольной области. По правому клику на динамик открыватся попап со списком треков динамика. В попапе можно:
+●	удалить трек
+●	изменить громкость для этого динамика
+●	прослушать трек
+●	прослушать то, как будет звучать динамик (проиграть все назначенные треки с заданной громкостью).
 
-### `yarn build`
+Треки назначаются на динамики:
+●	перетаскиванием на карту
+●	выделением динамика или нескольких динамиков с шифтом и кнопкой рядом с треком в фонотеке "Назначить на выбранные динамики".
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+API
+Типы данных:
+Track: Аудиоклип
+	{
+id: int,
+url: string,
+vol: float  // Дефолтная громкость
+}
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Speaker: Колонка
+	{
+id: int
+	coord: [float, float],
+	tracks: [
+		{id: int, vol: float | undefined }, // Громкость для колонки
+		...
+	}
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Методы:
+GET /api/library
+Получить фонотеку.
+Ответ: [Track, ...]
+Пример ответа: 
+[
+{id: 1, url: 'rammstein.mp3', vol:0.7},
+{id: 2, url: 'kremlin.mp3', vol:1}
+]
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+POST /api/library/upload
+Добавить трек в фонотеку.
+POST payload: file
+Ответ: Track
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+POST /api/library/<id>
+Изменить свойства трека в фонотеке
+POST payload: {vol: 0.9}
+Ответ: Track
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+DELETE /api/library/<id>
+Удалить трек из фонотеки
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+GET /api/speakers
+Получить список динамиков
+Ответ: [Speaker, …]
+Пример:
+[{
+id: 1,
+coord': [38.1, 45.2],
+tracks: [
+{id: 1, vol: 0.4},
+{id: 2}
+]
+}, …]
 
-## Learn More
+POST /api/speakers/<id> 
+Сохранить один динамик 
+POST payload: Speaker
+Ответ: Speaker
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+POST /api/speakers
+Сохранить список динамиков
+POST payload: [Speaker, …]
+Ответ: [Speaker, …]
+
+Классы, свойства, методы. Внутренняя организация приложения: модули, компоненты, состояния, обработчики событий.
