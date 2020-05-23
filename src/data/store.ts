@@ -1,14 +1,19 @@
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { all, fork } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
-import { rootReducer } from './speakers/reducer';
-import { rootSaga } from './speakers/effects';
-import { Speaker } from './speakers/types';
-import { Track } from './tracks/types';
+import { speakersSaga } from './speakers/sagas';
+import { speakersReducer, SpeakersState } from './speakers/reducer';
+import { tracksReducer, TracksState } from './tracks/reducer';
+import { tracksSaga } from './tracks/sagas';
 
 export type RootState = {
-  speakers: Speaker[],
-  tracks: Track[]  
+  speakers: SpeakersState,
+  tracks: TracksState  
+}
+
+function* rootSaga() {
+  yield all([fork(tracksSaga), fork(speakersSaga)]);
 }
 
 export function configureStore(): Store<RootState> {
@@ -19,8 +24,10 @@ export function configureStore(): Store<RootState> {
 
   // We'll create our store with the combined reducers/sagas
   const store = createStore(
-    rootReducer, 
-    undefined, 
+    combineReducers({
+      tracks: tracksReducer,
+      speakers: speakersReducer
+    }), 
     composeEnhansers(applyMiddleware(sagaMiddleware))
   );
 

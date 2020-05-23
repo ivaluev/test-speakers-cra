@@ -1,16 +1,22 @@
 import { Speaker } from '../data/speakers/types';
 import { delay } from '../utils/delay';
 
-export async function getSpeakers(): Promise<Speaker[]> {
-  return await delay([
-    new Speaker(1, [123, 90], [], null),
-    new Speaker(2, [268, 300], [], null),
-    new Speaker(3, [400, 200], [], null),
-    new Speaker(4, [300, 300], [], null)
-  ]);
+function getPosition(w: number, h: number): [number, number] {
+  console.log('size-in', w, h);
+  const wRand = Math.floor(w * Math.random());
+  const hRand = Math.floor(h * Math.random());
+  console.log('size-put', wRand, hRand);
+  return [wRand, hRand];
 }
 
-export async function postSpeaker(speaker: Speaker) {
+export async function getSpeakers(w: number, h: number): Promise<Speaker[]> {
+  return await delay(new Array(6)
+    .fill(undefined)
+    .map((v, i) => new Speaker(i, getPosition(w, h), [], null))
+  );
+}
+
+export async function postSpeaker(speaker: Speaker): Promise<Speaker> {
   throw new Error('Not Implemented.');
 }
 

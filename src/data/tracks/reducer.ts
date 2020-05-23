@@ -1,22 +1,27 @@
 import { ActionType, isActionOf } from 'typesafe-actions';
 import * as actions from './actions';
-import { RootState } from '../store';
+import { Track } from './types';
 
-export function rootReducer(state: RootState = {
-  speakers: [],
-  tracks: [],
-}, action: ActionType<typeof actions>): RootState {
+export type TracksState = {
+  loading: boolean,
+  error?: string, 
+  tracks: Track[]
+}
+
+export function tracksReducer(
+  state: TracksState = { loading: false, tracks: [] }, 
+  action: ActionType<typeof actions>): TracksState {
 
   if (isActionOf(actions.tracksRequest, action)) {
-    return state;
+    return { ...state, loading: true };
   }
 
   if (isActionOf(actions.tracksResponse, action)) {
-    return state;
+    return { ...state, loading: false, tracks: action.payload };
   }
 
   if (isActionOf(actions.tracksResponseError, action)) {
-    return state;
+    return { ...state, loading: false, error: action.payload };
   }
 
   return state;
