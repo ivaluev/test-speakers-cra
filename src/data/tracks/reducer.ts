@@ -5,7 +5,7 @@ import { Track } from './types';
 export type TracksState = {
   loading: boolean,
   error?: string, 
-  tracks: Track[],
+  tracks: Track[], // we need a couter for each track to show up
   trackPlaying?: number
 }
 

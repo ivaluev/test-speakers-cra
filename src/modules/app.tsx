@@ -9,7 +9,7 @@ export default function App() {
       <aside>
         <TrackCards />
       </aside>
-      <main className="drafting-lines--dotted">
+      <main>
         <AppSpeakers />
       </main>
     </>

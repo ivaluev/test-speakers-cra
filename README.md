@@ -1,14 +1,14 @@
 # Decomposition
 
-[ ] * build fixed layout (header aside main)
-[ ] * add headers with status (number of selected speakers + clear selection)
-[ ] * implement click selection
-[ ] * implement range selection
-[ ] * implement area selection
-[ ] * implement moving of speakers
-[ ] * implement constained moving of speakers
-[ ] * implement svg sprite 
-[ ] * implement styling of speakers (selection css outline + animation)
+* [ ] build fixed layout (header aside main)
+* [ ] add headers with status (number of selected speakers + clear selection)
+* [ ] implement click selection
+* [ ] implement range selection
+* [ ] implement area selection
+* [ ] implement moving of speakers
+* [ ] implement constained moving of speakers
+* [ ] implement svg sprite 
+* [ ] implement styling of speakers (selection css outline + animation)
 
 ---
 # Task Description

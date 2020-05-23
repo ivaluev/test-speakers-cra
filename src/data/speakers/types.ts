@@ -4,7 +4,7 @@ export type Offset = {
   w: number,
   h: number
 }
-
+// we copy in tracks from library to enable custom volume setup
 export class Speaker {
   constructor(
     public id: number,

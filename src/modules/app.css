@@ -18,19 +18,3 @@ main {
   position: relative;
   user-select: none;
 }
-
-.drafting-lines {
-  background-position-x: -2px;
-  background-position-y: -2px;
-  background-size: 100px 100px;
-  background-image:
-    linear-gradient(to right, rgb(228, 228, 228) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(228, 228, 228) 1px, transparent 1px);
-}
-
-.drafting-lines--dotted {
-  background-position-x: -2px;
-  background-position-y: -2px;
-  background-size: 100px 100px;
-  background-image: radial-gradient(circle, #575757 1px, rgba(0, 0, 0, 0) 1px);
-}

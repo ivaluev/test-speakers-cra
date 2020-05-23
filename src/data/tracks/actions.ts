@@ -8,4 +8,3 @@ export const tracksResponseError = createAction('TRACKS_RESPONSE_ERROR')<string>
 // should we care about selected track?
 export const actionTrackPlay = createAction('TRACK_PLAY')<number>();
 export const actionTrackAssign = createAction('TRACK_ASSIGN')<number>();
-export const actionTrackDelete = createAction('TRACK_DELETE')<number>();

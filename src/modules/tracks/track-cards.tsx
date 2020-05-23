@@ -32,6 +32,7 @@ const Wrapper = styled.div`
 `;
 
 const TracksHeader = styled.h1`
+  font-size: 1.5rem;
   padding: 1em 1em;
 `;
 
