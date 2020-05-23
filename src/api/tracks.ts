@@ -4,9 +4,9 @@ import { delay } from '../utils/delay';
 export async function getTracks(): Promise<Track[]> {
   return await delay([
     new Track(1, 'rammstein.mp3', 0.7),
-    new Track(1, 'rammstein2.mp3', 0.7),
-    new Track(1, 'rammstein3.mp3', 0.7),
-    new Track(1, 'rammstein4.mp3', 0.7),
+    new Track(2, 'rammstein2.mp3', 0.4),
+    new Track(3, 'rammstein3.mp3', 0.5),
+    new Track(4, 'rammstein4.mp3', 0.6),
   ]);
 }
 

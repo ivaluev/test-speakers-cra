@@ -5,7 +5,8 @@ import { Track } from './types';
 export type TracksState = {
   loading: boolean,
   error?: string, 
-  tracks: Track[]
+  tracks: Track[],
+  trackPlaying?: number
 }
 
 export function tracksReducer(

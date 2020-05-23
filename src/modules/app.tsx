@@ -1,13 +1,13 @@
 import React from 'react';
 import './app.css';
 import AppSpeakers from './speakers/speakers';
-import AppTracks from './tracks/tracks';
+import TrackCards from './tracks/track-cards';
 
 export default function App() {
   return (
     <>
       <aside>
-        <AppTracks />
+        <TrackCards />
       </aside>
       <main className="drafting-lines--dotted">
         <AppSpeakers />

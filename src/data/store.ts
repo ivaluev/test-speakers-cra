@@ -6,6 +6,7 @@ import { speakersSaga } from './speakers/sagas';
 import { speakersReducer, SpeakersState } from './speakers/reducer';
 import { tracksReducer, TracksState } from './tracks/reducer';
 import { tracksSaga } from './tracks/sagas';
+import { useSelector } from 'react-redux';
 
 export type RootState = {
   speakers: SpeakersState,
@@ -17,12 +18,8 @@ function* rootSaga() {
 }
 
 export function configureStore(): Store<RootState> {
-  // create the composing function for our middlewares
   const composeEnhansers = composeWithDevTools({});
-  // create the redux-saga middleware
   const sagaMiddleware = createSagaMiddleware();
-
-  // We'll create our store with the combined reducers/sagas
   const store = createStore(
     combineReducers({
       tracks: tracksReducer,
@@ -31,9 +28,15 @@ export function configureStore(): Store<RootState> {
     composeEnhansers(applyMiddleware(sagaMiddleware))
   );
 
-  // Don't forget to run the root saga, and return the store object.
   sagaMiddleware.run(rootSaga);
   
   return store;
+}
+
+export function useAppSelector<TSelected = unknown>(
+  selector: (state: RootState) => TSelected,
+  equalityFn?: (left: TSelected, right: TSelected) => boolean
+): TSelected {
+  return useSelector<RootState, TSelected>(selector, equalityFn);
 }
 
