@@ -6,7 +6,7 @@ import TrackCards from './tracks/track-cards';
 export default function App() {
   return (
     <>
-      <aside>
+      <aside className="sdsd">
         <TrackCards />
       </aside>
       <main>

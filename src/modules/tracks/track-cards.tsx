@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../data/store';
-import { tracksRequest } from '../../data/tracks/actions';
+import { actionTracksRequest } from '../../data/tracks/actions';
 import { Track } from '../../data/tracks/types';
 import Separator from '../common/separator';
 import TrackCard from './track-card';
@@ -12,7 +12,7 @@ export default function TrackCards() {
   const tracks = useAppSelector<Track[]>(state => state.tracks.tracks);
 
   useEffect(() => {
-    dispatch(tracksRequest());
+    dispatch(actionTracksRequest());
   }, [dispatch]);
 
   return (

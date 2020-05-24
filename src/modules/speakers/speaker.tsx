@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Dispatch } from 'redux';
 import { Speaker, Offset } from '../../data/speakers/types';
 import { connect } from 'react-redux';
-import { speakersSelect, speakersDelelect } from '../../data/speakers/actions';
+import { actionSpeakersSelect, actionSpeakersDelelect } from '../../data/speakers/actions';
 import { RootState } from '../../data/store';
 
 type PropsSelected = {
@@ -12,17 +12,18 @@ type PropsSelected = {
 
 type Props = {
   speaker: Speaker,
+  tracksLength: number,
   isSelected: boolean,
   dispatch: Dispatch
 }
 
-function AppSpeaker({ speaker, isSelected, dispatch }: Props) {
-  const {coord, tracks} = speaker; 
+function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
+  const {coord} = speaker; 
 
   function toggleSpeakerSelection() {
     isSelected 
-      ? dispatch(speakersDelelect([speaker.id]))
-      : dispatch(speakersSelect([speaker.id]));
+      ? dispatch(actionSpeakersDelelect([speaker.id]))
+      : dispatch(actionSpeakersSelect([speaker.id]));
     
   }
 
@@ -33,13 +34,14 @@ function AppSpeaker({ speaker, isSelected, dispatch }: Props) {
       isSelected={isSelected}
       onClick={toggleSpeakerSelection}
     >
-        {tracks.length}
+        {tracksLength}
     </AppSpeakerDiv>
   );
 }
 
 const mapStateToProps = (state: RootState, ownProps: Pick<Props, 'speaker'>) => ({
-  isSelected: state.speakers.speakersSelected.includes(ownProps.speaker.id)
+  isSelected: state.speakers.speakersSelected.includes(ownProps.speaker.id),
+  tracksLength: state.speakers.speakers[ownProps.speaker.id].tracks.length
 });
 
 export default connect(mapStateToProps)(AppSpeaker);

@@ -13,15 +13,15 @@ export function tracksReducer(
   state: TracksState = { loading: false, tracks: [] }, 
   action: ActionType<typeof actions>): TracksState {
 
-  if (isActionOf(actions.tracksRequest, action)) {
+  if (isActionOf(actions.actionTracksRequest, action)) {
     return { ...state, loading: true };
   }
 
-  if (isActionOf(actions.tracksResponse, action)) {
+  if (isActionOf(actions.actionTracksResponse, action)) {
     return { ...state, loading: false, tracks: action.payload };
   }
 
-  if (isActionOf(actions.tracksResponseError, action)) {
+  if (isActionOf(actions.actionTracksResponseError, action)) {
     return { ...state, loading: false, error: action.payload };
   }
 

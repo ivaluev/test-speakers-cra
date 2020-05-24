@@ -6,7 +6,7 @@ type Props = {
   vol: number
 }
 
-export default function TrackVolumeSlider({
+export default function Slider({
   trackId,
   vol
 }: Props) {
@@ -23,5 +23,5 @@ const SliderWrapper = styled.div`
 `;
 
 const SliderInput = styled.input`
-  
+  width: 90%;
 `;

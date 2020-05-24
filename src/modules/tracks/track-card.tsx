@@ -1,7 +1,12 @@
 import React from 'react';
 import { Track } from '../../data/tracks/types';
 import styled from '@emotion/styled';
-import TrackVolumeSlider from '../common/track-volume-slider';
+import Slider from '../common/slider';
+import { Label } from '../common/label';
+import { Button } from '../common/button';
+import { useDispatch } from 'react-redux';
+import { actionTrackAssign } from '../../data/speakers/actions';
+import { useAppSelector } from '../../data/store';
 
 type Props = {
   track: Track
@@ -10,35 +15,53 @@ type Props = {
 export default function TrackCard({
   track
 } : Props) {
+  const dispatch = useDispatch();
+  const assignedToCount = useAppSelector<number>(state => {
+    const result = state.speakers.speakers
+      .filter(s => s.tracks.some(t => t.id === track.id)) 
+      .length;
+    return result;
+  });
+
   return (
-    <TrackCardWrapper draggable="true">
-      <TrackHandleWrapper >
+    <TrackCardWrapper>
+      <TrackHandleCol >
         <TrackHandle />
-      </TrackHandleWrapper>
-      <TrackInfoWrappper>
+      </TrackHandleCol>
+      <TrackInfoCol>
         <TrackInfoName>{track.url}</TrackInfoName>
-        <TrackVolumeSlider trackId={track.id} vol={track.vol} />
-      </TrackInfoWrappper>
-      <TrackAssignedCol>7</TrackAssignedCol>
+        <Slider trackId={track.id} vol={track.vol} />
+      </TrackInfoCol>
+      <TrackAssignedCol>
+        <AssignedInfo>
+          Назначен на <Label>{assignedToCount}</Label>
+        </AssignedInfo>
+        <AssignActions>
+          <Button onClick={() => dispatch(actionTrackAssign(track))}>Назначить</Button>
+        </AssignActions>
+      </TrackAssignedCol>
     </TrackCardWrapper>
   );
 }
 
-const TrackAssignedCol = styled.div`
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: #aaa;
-  color: white;
+const AssignActions = styled.div`
+  text-align: right;
+  flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  font-size: 1.1rem;
-  cursor: pointer;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
-const TrackInfoWrappper = styled.div`
+const AssignedInfo = styled.div`
+  text-align: right;
+`;
+
+const TrackAssignedCol = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TrackInfoCol = styled.div`
   flex: 1;
 `;
 
@@ -47,7 +70,7 @@ const TrackInfoName = styled.h3`
   color: #aaa;
 `;
 
-const TrackHandleWrapper = styled.div`
+const TrackHandleCol = styled.div`
   width: 2em;
   padding-left: 1rem;
   position: relative;
@@ -93,9 +116,9 @@ const TrackCardWrapper = styled.li`
     margin-top: 0;
   }
   box-shadow: 0 1px 2px #ccc;
-  &:hover {
+  /* &:hover {
     box-shadow: 0 2px 8px #bbb;
-  }
+  } */
   display: flex;
   background-color: white;
 `;
