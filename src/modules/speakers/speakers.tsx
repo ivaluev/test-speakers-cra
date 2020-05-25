@@ -38,9 +38,10 @@ function AppSpeakers({ speakers, dispatch }: Props) {
 }
 
 const SpeakersWrapper = styled.div`
+  position: relative;
   flex: 1 1 auto;
-  /* background-position-x: -2px; */
-  /* background-position-y: -2px; */
+  /* background-position-x: 33px; */
+  /* background-position-y: 35px; */
   background-size: 100px 100px;
   background-image: radial-gradient(circle, #575757 1px, rgba(0, 0, 0, 0) 1px);
   /* background-size: 100px 100px;

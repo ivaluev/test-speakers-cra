@@ -1,11 +1,18 @@
 import { Speaker } from '../data/speakers/types';
 import { delay } from '../utils/delay';
 
+function snapToGrid(offset: number, range: number) {
+  const step = 100;
+  const result = new Array(Math.floor(range / step))
+    .fill(0)
+    .map((_, i) => i * step)
+    .reduce((acc, cur) => Math.abs(cur - offset) < Math.abs(acc - offset) ? cur : acc);
+  return result;
+}
+
 function getPosition(w: number, h: number): [number, number] {
-  console.log('size-in', w, h);
-  const wRand = Math.floor(w * Math.random());
-  const hRand = Math.floor(h * Math.random());
-  console.log('size-put', wRand, hRand);
+  const wRand = snapToGrid(Math.floor(w * Math.random()), w) + 65;
+  const hRand = snapToGrid(Math.floor(h * Math.random()), h) + 67;
   return [wRand, hRand];
 }
 
