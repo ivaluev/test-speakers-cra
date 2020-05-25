@@ -13,3 +13,8 @@ export class Speaker {
     public currentTrackIndex: number | null
   ) {}
 }
+
+export type SpeakerSelection = {
+  ids: number[],
+  keepSelection: boolean
+}

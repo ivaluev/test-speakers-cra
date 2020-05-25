@@ -26,11 +26,10 @@ export function speakersReducer(
   }
 
   if (isActionOf(actions.actionSpeakersSelect, action)) {
-    const multiple = false; //todo
-    if (multiple) {
-      return { ...state, speakersSelected: [...state.speakersSelected, ...action.payload] };
+    if (action.payload.keepSelection) {
+      return { ...state, speakersSelected: [...state.speakersSelected, ...action.payload.ids] };
     } else {
-      return { ...state, speakersSelected: [...action.payload] };
+      return { ...state, speakersSelected: [...action.payload.ids] };
     }
   }
 

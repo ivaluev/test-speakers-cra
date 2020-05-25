@@ -11,8 +11,8 @@ function snapToGrid(offset: number, range: number) {
 }
 
 function getPosition(w: number, h: number): [number, number] {
-  const wRand = snapToGrid(Math.floor(w * Math.random()), w) + 65;
-  const hRand = snapToGrid(Math.floor(h * Math.random()), h) + 67;
+  const wRand = snapToGrid(Math.floor(w * Math.random()), w) + 49;
+  const hRand = snapToGrid(Math.floor(h * Math.random()), h) + 50;
   return [wRand, hRand];
 }
 
