@@ -1,29 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import ButtonClose from '../button-close/button-close';
 import './modal.scss';
+import { CSSTransition } from 'react-transition-group';
 
-
-interface Props {
-  opened: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+export class ModelContextApi {
+  public renderModalContent: (content: React.ReactNode) => void =
+    () => { throw new Error('Not Implemented.'); }
 }
 
-// turn into class??
+export const ModalContext = React.createContext<ModelContextApi>(new ModelContextApi());
 
-export default function Modal({
-  opened,
-  onClose,
-  children
-}: Props) {
-  const [isOpen, setIsOpen] = useState(opened);
+interface ModalProviderProps {
+  children: React.ReactNode
+}
 
-  useEffect(() => {
-    if (opened !== isOpen)
-      setIsOpen(opened);
-  }, [isOpen, opened]);
+export function ModalProvider({ children }: ModalProviderProps) {
+  console.log('rendering modal provider...');
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [content, setContent] = useState<React.ReactNode>();
+
+  function renderModalContent(content: React.ReactNode) {
+    setContent(content);
+    setIsOpen(true);
+  }
+  function close() {
+    console.log('closing...');
+    setIsOpen(false);
+  }
   return (
+    <ModalContext.Provider value={{ renderModalContent }}>
+      <Modal isOpen={isOpen} content={content} close={close} />
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+interface ModalProps {
+  isOpen: boolean;
+  content: React.ReactNode;
+  close: () => void;
+}
+
+function Modal({ isOpen, content, close }: ModalProps) {
+  console.log('rendering portal modal...');
+
+  return ReactDOM.createPortal(
     <CSSTransition
       classNames={{
         enter: 'modal_enter',
@@ -38,11 +61,12 @@ export default function Modal({
     >
       <div className="modal">
         <div className="modal__content">
-          <ButtonClose onClick={() => alert('sdds')} className="close" />
-          {children}
+          <ButtonClose onClick={close} className="close" />
+          {content}
         </div>
       </div>
     </CSSTransition>
+    ,
+    document.querySelector('#modal-root')!
   );
-
 }

@@ -20,6 +20,7 @@ export default function ButtonClose({onClick, className}: Props) {
 const CloseIconWrapper = styled.div`
   width: 25px;
   height: 25px;
+  cursor: pointer;
 `;
 
 const CloseIconStyled = styled(CloseIcon)`

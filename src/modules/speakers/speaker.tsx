@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { Dispatch } from 'redux';
 import { Speaker, Offset } from '../../data/speakers/types';
 import { connect } from 'react-redux';
 import { actionSpeakersSelect, actionSpeakersDelelect } from '../../data/speakers/actions';
 import { RootState } from '../../data/store';
-import Modal from '../common/modal/modal';
+import { ModalContext } from '../common/modal/modal';
 
 type PropsSelected = {
   isSelected: boolean
@@ -19,7 +19,7 @@ type Props = {
 }
 
 function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { renderModalContent } = useContext(ModalContext);
   const { coord } = speaker;
 
   function toggleSpeakerSelection(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -28,6 +28,11 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
     isSelected
       ? dispatch(actionSpeakersDelelect([speaker.id]))
       : dispatch(actionSpeakersSelect([speaker.id], isShiftPressed));
+  }
+
+  function openModal() {
+    console.log('speaker modal opening...');
+    renderModalContent('lalalalala');
   }
 
   return (
@@ -43,11 +48,8 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
       <AppSpeakerPlayer isSelected={isSelected}>
         <ButtonPlay />
       </AppSpeakerPlayer>
-      <AppSpeakerMenu isSelected={isSelected} onClick={() => setIsModalOpen(true)}>
+      <AppSpeakerMenu isSelected={isSelected} onClick={openModal}>
         <ButtonBurger />
-        <Modal opened={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <div>hey there!</div>
-        </Modal>
       </AppSpeakerMenu>
     </AppSpeakerDiv>
   );
