@@ -6,7 +6,8 @@ import { Speaker } from '../../data/speakers/types';
 import { Dispatch } from 'redux';
 import { speakersRequest } from '../../data/speakers/actions';
 import styled from '@emotion/styled';
-import Separator from '../common/separator';
+import Separator from '../../packages/separator';
+import { Header } from '../../packages/header';
 
 type Props = {
   speakers: Speaker[]
@@ -28,7 +29,7 @@ function AppSpeakers({ speakers, dispatch }: Props) {
 
   return (
     <Wrapper>
-      <SpeakersHeader>Speakers</SpeakersHeader>
+      <Header>Speakers</Header>
       <Separator />
       <SpeakersWrapper ref={wrapperRef}>
         {speakers.map(s => <AppSpeaker key={s.id} speaker={s} />)}
@@ -52,11 +53,6 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-`;
-
-const SpeakersHeader = styled.h1`
-  font-size: 1.5rem;
-  padding: 1em 1em;
 `;
 
 const mapStateToProps = (state: RootState) => ({

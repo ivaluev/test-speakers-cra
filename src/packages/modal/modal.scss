@@ -5,14 +5,13 @@
   width: 100vw;
   height: 100vh;
   transition: background-color 300ms, transform 300ms;
+  transform: scale(1.2);
   z-index: 100;
-  cursor: default;
 }
 
 .modal__content {
   position: relative;
   margin: 25vh 25vw;
-  padding: 20px;
   height: 25vw;
   background: white;
   border-radius: 5px;

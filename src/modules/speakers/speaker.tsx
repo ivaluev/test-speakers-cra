@@ -5,7 +5,8 @@ import { Speaker, Offset } from '../../data/speakers/types';
 import { connect } from 'react-redux';
 import { actionSpeakersSelect, actionSpeakersDelelect } from '../../data/speakers/actions';
 import { RootState } from '../../data/store';
-import { ModalContext } from '../common/modal/modal';
+import { ModalContext } from '../../packages/modal/modal';
+import SpeakerInfo from './speaker-info';
 
 type PropsSelected = {
   isSelected: boolean
@@ -32,7 +33,7 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
 
   function openModal() {
     console.log('speaker modal opening...');
-    renderModalContent('lalalalala');
+    renderModalContent(<SpeakerInfo speaker={speaker} />);
   }
 
   return (

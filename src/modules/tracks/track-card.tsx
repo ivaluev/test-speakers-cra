@@ -1,9 +1,9 @@
 import React from 'react';
 import { Track } from '../../data/tracks/types';
 import styled from '@emotion/styled';
-import Slider from '../common/slider';
-import { Label } from '../common/label';
-import { Button } from '../common/button';
+import Slider from '../../packages/slider';
+import { Label } from '../../packages/label';
+import { Button } from '../../packages/button';
 import { useDispatch } from 'react-redux';
 import { actionTrackAssign } from '../../data/speakers/actions';
 import { useAppSelector } from '../../data/store';

@@ -13,12 +13,14 @@ export default function Slider({
   return (
     <SliderWrapper>
       <p>volume:</p>
-      <SliderInput type="range" min="0" max="1" value={vol} id="myRange" readOnly step="0.1" />
+      <SliderInput type="range" min="0" max="1" value={vol} id="myRange" step="0.1" />
     </SliderWrapper>
   );
 }
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled.span`
+  display: inline-block;
+  width: 100%;
   margin-top: .7rem;
 `;
 

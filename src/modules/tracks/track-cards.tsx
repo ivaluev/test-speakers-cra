@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../data/store';
 import { actionTracksRequest } from '../../data/tracks/actions';
 import { Track } from '../../data/tracks/types';
-import Separator from '../common/separator';
+import Separator from '../../packages/separator';
 import TrackCard from './track-card';
+import { Header } from '../../packages/header';
 
 export default function TrackCards() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function TrackCards() {
 
   return (
     <Wrapper>
-      <TracksHeader>Tracks</TracksHeader>
+      <Header>Tracks</Header>
       <Separator />
       <TracksList>
         {tracks.map(t => <TrackCard key={t.id} track={t} />)}
@@ -29,11 +30,6 @@ export default function TrackCards() {
 
 const Wrapper = styled.div`
   height: 100%;
-`;
-
-const TracksHeader = styled.h1`
-  font-size: 1.5rem;
-  padding: 1em 1em;
 `;
 
 const TracksList = styled.ul`
