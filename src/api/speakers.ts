@@ -19,7 +19,7 @@ function getPosition(w: number, h: number): [number, number] {
 export async function getSpeakers(w: number, h: number): Promise<Speaker[]> {
   return await delay(new Array(6)
     .fill(undefined)
-    .map((v, i) => new Speaker(i, getPosition(w, h), [], null))
+    .map((v, i) => new Speaker(i, getPosition(w, h), [], false, null))
   );
 }
 

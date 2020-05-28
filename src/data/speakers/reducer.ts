@@ -1,13 +1,6 @@
 import { ActionType, isActionOf } from 'typesafe-actions';
-import { Speaker } from './types';
+import { SpeakersState } from './types';
 import * as actions from './actions';
-
-export type SpeakersState = {
-  loading: boolean,
-  error?: string,
-  speakers: Speaker[],
-  speakersSelected: number[]
-}
 
 export function speakersReducer(
   state: SpeakersState = { loading: false, speakers: [], speakersSelected: [] },

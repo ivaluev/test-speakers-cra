@@ -5,6 +5,7 @@
 * [ ] implement click selection
 * [ ] implement range selection
 * [ ] implement area selection
+* [ ] implement tracks drag and drop
 * [ ] implement moving of speakers
 * [ ] implement constained moving of speakers
 * [ ] implement svg sprite 

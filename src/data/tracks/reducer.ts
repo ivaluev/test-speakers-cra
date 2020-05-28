@@ -1,13 +1,6 @@
 import { ActionType, isActionOf } from 'typesafe-actions';
+import { TracksState } from './types';
 import * as actions from './actions';
-import { Track } from './types';
-
-export type TracksState = {
-  loading: boolean,
-  error?: string, 
-  tracks: Track[], // we need a couter for each track to show up
-  trackPlaying?: number
-}
 
 export function tracksReducer(
   state: TracksState = { loading: false, tracks: [] }, 

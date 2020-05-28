@@ -34,12 +34,15 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
   }
 
   function openModal() {
-    console.log('speaker modal opening...');
     renderModalContent(<SpeakerInfo speaker={speaker} />);
   }
 
+  function play() {
+    alert('playing');
+  }
+
   return (
-    <AppSpeakerDiv
+    <AppSpeakerWrapper
       w={coord[0]}
       h={coord[1]}
     >
@@ -48,9 +51,9 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
       >
         {tracksLength}
       </AppSpeakerCounter>
-      {isSelected && <ButtonPlayPositioned />}
+      {isSelected && <ButtonPlayPositioned onClick={play} />}
       {isSelected && <ButtonMenuPositioned onClick={openModal} />}
-    </AppSpeakerDiv>
+    </AppSpeakerWrapper>
   );
 }
 
@@ -73,7 +76,7 @@ const ButtonMenuPositioned = styled(ButtonCMenu)`
   right: -15px;
 `;
 
-const AppSpeakerDiv = styled.div<Offset>`
+const AppSpeakerWrapper = styled.div<Offset>`
   position: absolute;
   display: flex;
   justify-content: center;
@@ -83,6 +86,7 @@ const AppSpeakerDiv = styled.div<Offset>`
   width: 100px;
   height: 100px;
 `;
+
 const AppSpeakerCounter = styled.div<PropsSelected>`
   display: flex;
   justify-content: center;

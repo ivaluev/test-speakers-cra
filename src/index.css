@@ -24,3 +24,8 @@ body {
 ol, ul {
   list-style: none;
 }
+
+#root {
+  display: flex;
+  height: 100%;
+}

@@ -3,10 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { all, fork } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
 import { speakersSaga } from './speakers/sagas';
-import { speakersReducer, SpeakersState } from './speakers/reducer';
-import { tracksReducer, TracksState } from './tracks/reducer';
+import { speakersReducer } from './speakers/reducer';
+import { tracksReducer } from './tracks/reducer';
 import { tracksSaga } from './tracks/sagas';
 import { useSelector } from 'react-redux';
+import { SpeakersState } from './speakers/types';
+import { TracksState } from './tracks/types';
 
 export type RootState = {
   speakers: SpeakersState,
