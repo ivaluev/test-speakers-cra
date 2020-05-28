@@ -7,6 +7,8 @@ import { actionSpeakersSelect, actionSpeakersDelelect } from '../../data/speaker
 import { RootState } from '../../data/store';
 import { ModalContext } from '../../packages/modal/modal';
 import SpeakerInfo from './speaker-info';
+import ButtonCPlay from '../../packages/button-c-play';
+import ButtonCMenu from '../../packages/button-c-menu';
 
 type PropsSelected = {
   isSelected: boolean
@@ -46,12 +48,8 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
       >
         {tracksLength}
       </AppSpeakerCounter>
-      <AppSpeakerPlayer isSelected={isSelected}>
-        <ButtonPlay />
-      </AppSpeakerPlayer>
-      <AppSpeakerMenu isSelected={isSelected} onClick={openModal}>
-        <ButtonBurger />
-      </AppSpeakerMenu>
+      {isSelected && <ButtonPlayPositioned />}
+      {isSelected && <ButtonMenuPositioned onClick={openModal} />}
     </AppSpeakerDiv>
   );
 }
@@ -63,70 +61,16 @@ const mapStateToProps = (state: RootState, ownProps: Pick<Props, 'speaker'>) => 
 
 export default connect(mapStateToProps)(AppSpeaker);
 
-const AppSpeakerPlayer = styled.div<PropsSelected>`
+const ButtonPlayPositioned = styled(ButtonCPlay)`
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   top: -15px;
   left: -15px;
-  border: 3px solid gainsboro;
-  background-color: white;
-  display: ${props => props.isSelected ? 'flex' : 'none'};
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &:hover > span {
-    border-left-color: blue;
-  }
-`;
-const ButtonPlay = styled.span`
-  position: relative;
-  left: 1px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid grey;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
 `;
 
-const AppSpeakerMenu = styled.div<PropsSelected>`
+const ButtonMenuPositioned = styled(ButtonCMenu)`
   position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
   top: -15px;
   right: -15px;
-  border: 3px solid gainsboro;
-  background-color: white;
-  display: ${props => props.isSelected ? 'flex' : 'none'};
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &:hover > span {
-    background-color: blue;
-  }
-`;
-const ButtonBurger = styled.span`
-  width: 15px;
-  height: 2px;
-  background-color: grey;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 2px;
-    top: 9px;
-    background-color: inherit;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 2px;
-    bottom: 9px;
-    background-color: inherit;
-  }
 `;
 
 const AppSpeakerDiv = styled.div<Offset>`

@@ -3,7 +3,7 @@ import { Track } from '../../data/tracks/types';
 import styled from '@emotion/styled';
 import Slider from '../../packages/slider';
 import { Label } from '../../packages/label';
-import { Button } from '../../packages/button';
+import { Button } from '../../packages/button-r-primary';
 import { useDispatch } from 'react-redux';
 import { actionTrackAssign } from '../../data/speakers/actions';
 import { useAppSelector } from '../../data/store';
