@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ClassNameProps, OnClickProps } from './types';
+import { PropsClassName, PropsOnClick } from './types';
 import { ButtonC } from './button-c';
 
 export default function ButtonCPlay({
   className,
   onClick
-}: ClassNameProps & OnClickProps) {
+}: PropsClassName & PropsOnClick) {
   return (
     <ButtonCHovered className={className} onClick={onClick}>
-      <IconPlay />
+       <IconPlay />
     </ButtonCHovered>
   );
 }

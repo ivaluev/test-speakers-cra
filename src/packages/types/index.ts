@@ -1,7 +1,11 @@
-export interface ClassNameProps {
+export interface PropsClassName {
   className?: string;
 }
 
-export interface OnClickProps {
+export interface PropsOnClick {
   onClick?: () => void;
+}
+
+export type PropsIsPlaying = {
+  isPlaying: boolean
 }

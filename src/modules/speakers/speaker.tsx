@@ -3,12 +3,17 @@ import styled from '@emotion/styled';
 import { Dispatch } from 'redux';
 import { Speaker, Offset } from '../../data/speakers/types';
 import { connect } from 'react-redux';
-import { actionSpeakersSelect, actionSpeakersDelelect } from '../../data/speakers/actions';
+import { 
+  actionSpeakersSelect, 
+  actionSpeakersDelelect, 
+  actionSpeakerPlaylistPlay 
+} from '../../data/speakers/actions';
 import { RootState } from '../../data/store';
 import { ModalContext } from '../../packages/modal/modal';
 import SpeakerInfo from './speaker-info';
 import ButtonCPlay from '../../packages/button-c-play';
 import ButtonCMenu from '../../packages/button-c-menu';
+import ButtonCStop from '../../packages/button-c-stop';
 
 type PropsSelected = {
   isSelected: boolean
@@ -18,12 +23,20 @@ type Props = {
   speaker: Speaker,
   tracksLength: number,
   isSelected: boolean,
+  isPlaying: boolean,
   dispatch: Dispatch
 }
 
-function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
+function AppSpeaker({ 
+  speaker, 
+  tracksLength, 
+  isSelected, 
+  isPlaying,
+  dispatch 
+}: Props) {
   const { renderModalContent } = useContext(ModalContext);
   const { coord } = speaker;
+  const showButtons = tracksLength > 0 && isSelected;
 
   function toggleSpeakerSelection(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const isShiftPressed = e.shiftKey;
@@ -37,8 +50,8 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
     renderModalContent(<SpeakerInfo speaker={speaker} />);
   }
 
-  function play() {
-    alert('playing');
+  function togglePlay() {
+    dispatch(actionSpeakerPlaylistPlay(speaker.id, !isPlaying));
   }
 
   return (
@@ -51,20 +64,30 @@ function AppSpeaker({ speaker, tracksLength, isSelected, dispatch }: Props) {
       >
         {tracksLength}
       </AppSpeakerCounter>
-      {isSelected && <ButtonPlayPositioned onClick={play} />}
-      {isSelected && <ButtonMenuPositioned onClick={openModal} />}
+      {showButtons && (isPlaying 
+        ? <ButtonStopPositioned onClick={togglePlay} />
+        : <ButtonPlayPositioned onClick={togglePlay} />)
+      }
+      {showButtons && <ButtonMenuPositioned onClick={openModal} />}
     </AppSpeakerWrapper>
   );
 }
 
 const mapStateToProps = (state: RootState, ownProps: Pick<Props, 'speaker'>) => ({
+  tracksLength: state.speakers.speakers[ownProps.speaker.id].tracks.length,
   isSelected: state.speakers.speakersSelected.includes(ownProps.speaker.id),
-  tracksLength: state.speakers.speakers[ownProps.speaker.id].tracks.length
+  isPlaying: state.speakers.speakers[ownProps.speaker.id].isPlaying
 });
 
 export default connect(mapStateToProps)(AppSpeaker);
 
 const ButtonPlayPositioned = styled(ButtonCPlay)`
+  position: absolute;
+  top: -15px;
+  left: -15px;
+`;
+
+const ButtonStopPositioned = styled(ButtonCStop)`
   position: absolute;
   top: -15px;
   left: -15px;

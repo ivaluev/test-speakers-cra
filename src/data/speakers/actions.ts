@@ -18,3 +18,8 @@ export const actionSpeakersDelelect = createAction('SPEAKERS_DESELECT')<number[]
 // should we care about selected track?
 export const actionTrackPlay = createAction('TRACK_PLAY')<number>();
 export const actionTrackAssign = createAction('TRACK_ASSIGN')<Track>();
+
+export const actionSpeakerPlaylistPlay = createAction(
+  'SPEAKER_PLAY',
+  (id: number, isPlaying: boolean) => ({id, isPlaying})
+)();

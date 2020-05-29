@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ClassNameProps, OnClickProps } from './types';
+import { PropsClassName, PropsOnClick } from './types';
 import { ButtonC } from './button-c';
 
 export default function ButtonCMenu({
   className,
   onClick
-}: ClassNameProps & OnClickProps) {
+}: PropsClassName & PropsOnClick) {
   return (
     <ButtonCHovered className={className} onClick={onClick}>
       <IconMenu />

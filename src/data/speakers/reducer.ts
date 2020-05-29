@@ -44,5 +44,14 @@ export function speakersReducer(
     return { ...state, speakers: speakersUpdated };
   }
 
+  if (isActionOf(actions.actionSpeakerPlaylistPlay, action)) {
+    const speakersUpdated = [...state.speakers];
+    const target = speakersUpdated.find(s => s.id === action.payload.id);
+    if (target) {
+      target.isPlaying = action.payload.isPlaying;
+    }
+    return { ...state, speakers: speakersUpdated }
+  }
+
   return state;
 }
