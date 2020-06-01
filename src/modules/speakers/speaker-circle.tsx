@@ -7,6 +7,8 @@ import { PropsOnClick } from '../../packages/types';
 
 const COL_1 = '#0099ff';
 const COL_2 = '#d0e7f6';
+const COL_NORMAL = '#3f51b5';
+const COL_SELECTED = '#e91e63';
 
 export default function SpeakerCircle({
   isSelected,
@@ -31,6 +33,16 @@ const Container = styled.span`
   height: 60px;
 `;
 
+// .rounded-corners-gradient-borders {
+//   width: 300px;
+//   height: 80px;
+//   border: double 4px transparent;
+//   border-radius: 80px;
+//   background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+//   background-origin: border-box;
+//   background-clip: content-box, border-box;
+// }
+
 const CircleOuter = styled.div<PropsSelected>`
   position: absolute;
   top: 0;
@@ -42,8 +54,8 @@ const CircleOuter = styled.div<PropsSelected>`
   height: 60px;
   color: white;
   background: radial-gradient(${COL_1}, ${lighten(0.9, COL_1)} 85%);
+  border: 6px solid ${props => props.isSelected ? COL_SELECTED : COL_NORMAL};
   border-radius: 50%;
-  border: 6px solid ${props => props.isSelected ? '#e91e63' : '#3f51b5'};
   cursor: pointer;
   &:hover {
     border-color: #e91e63;
