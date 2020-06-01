@@ -50,7 +50,7 @@ export function speakersReducer(
     if (target) {
       target.isPlaying = action.payload.isPlaying;
     }
-    return { ...state, speakers: speakersUpdated }
+    return { ...state, speakers: speakersUpdated };
   }
 
   return state;
