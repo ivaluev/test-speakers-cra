@@ -6,6 +6,7 @@ export const ButtonC = styled.div`
   height: 36px;
   border-radius: 50%;
   border: 3px solid gainsboro;
+  /* hide map beneath button */
   background-color: white;
   display: flex;
   justify-content: center;

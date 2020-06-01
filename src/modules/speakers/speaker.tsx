@@ -14,10 +14,7 @@ import SpeakerInfo from './speaker-info';
 import ButtonCPlay from '../../packages/button-c-play';
 import ButtonCMenu from '../../packages/button-c-menu';
 import ButtonCStop from '../../packages/button-c-stop';
-
-type PropsSelected = {
-  isSelected: boolean
-}
+import { SpeakerCounter } from './speaker-counter';
 
 type Props = {
   speaker: Speaker,
@@ -59,11 +56,12 @@ function AppSpeaker({
       w={coord[0]}
       h={coord[1]}
     >
-      <AppSpeakerCounter isSelected={isSelected}
+      <SpeakerCounter 
+        isSelected={isSelected}
         onClick={toggleSpeakerSelection}
       >
         {tracksLength}
-      </AppSpeakerCounter>
+      </SpeakerCounter>
       {showButtons && (isPlaying 
         ? <ButtonStopPositioned onClick={togglePlay} />
         : <ButtonPlayPositioned onClick={togglePlay} />)
@@ -108,21 +106,4 @@ const AppSpeakerWrapper = styled.div<Offset>`
   left: ${props => props.w}px;
   width: 100px;
   height: 100px;
-`;
-
-const AppSpeakerCounter = styled.div<PropsSelected>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  color: white;
-  font-weight: 700;
-  background-color: hotpink;
-  background-color: ${props => props.isSelected ? 'blue' : 'inital'};
-  &:hover {
-    cursor: pointer;
-    background-color: blue;
-  }
 `;

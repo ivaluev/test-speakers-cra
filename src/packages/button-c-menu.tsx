@@ -26,18 +26,21 @@ const IconMenu = styled.span`
   background-color: grey;
   &:before {
     content: '';
-    position: absolute;
+    display: block;
+    position: relative;
     width: 15px;
     height: 2px;
-    top: 9px;
+    top: -5px;
+    /* inherit hover or static colors */
     background-color: inherit;
   }
   &:after {
     content: '';
-    position: absolute;
+    display: block;
+    position: relative;
     width: 15px;
     height: 2px;
-    bottom: 9px;
+    top: 3px;
     background-color: inherit;
   }
 `;

@@ -14,13 +14,5 @@ const ButtonCMenuPositioned = styled(ButtonCMenu)`
   left: 30px;
 `;
 
-export const Normal = () => (
-  <div style={{
-    width: '100px',
-    height: '100px',
-    border: '1px solid red',
-    position: 'relative'
-  }}>
-    <ButtonCMenuPositioned onClick={action('menu clicked')} />
-  </div>
-);
+export const Normal = () => <ButtonCMenuPositioned onClick={action('menu clicked')} />;
+
