@@ -14,7 +14,7 @@ import SpeakerInfo from './speaker-info';
 import ButtonCPlay from '../../packages/button-c-play';
 import ButtonCMenu from '../../packages/button-c-menu';
 import ButtonCStop from '../../packages/button-c-stop';
-import { SpeakerCounter } from './speaker-counter';
+import SpeakerCircle from './speaker-circle';
 
 type Props = {
   speaker: Speaker,
@@ -56,12 +56,10 @@ function AppSpeaker({
       w={coord[0]}
       h={coord[1]}
     >
-      <SpeakerCounter 
+      <SpeakerCircle 
         isSelected={isSelected}
         onClick={toggleSpeakerSelection}
-      >
-        {tracksLength}
-      </SpeakerCounter>
+      />
       {showButtons && (isPlaying 
         ? <ButtonStopPositioned onClick={togglePlay} />
         : <ButtonPlayPositioned onClick={togglePlay} />)

@@ -43,6 +43,7 @@ const SpeakersWrapper = styled.div`
   flex: 1 1 auto;
   background-size: 100px 100px;
   background-image: radial-gradient(circle, #575757 1px, rgba(0, 0, 0, 0) 1px);
+  overflow: hidden;
   /* background-size: 100px 100px;
   background-image:
     linear-gradient(to right, rgb(228, 228, 228) 1px, transparent 1px),

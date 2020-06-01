@@ -3,7 +3,7 @@ export interface PropsClassName {
 }
 
 export interface PropsOnClick {
-  onClick?: () => void;
+  onClick?: (event: any) => void;
 }
 
 export type PropsIsPlaying = {

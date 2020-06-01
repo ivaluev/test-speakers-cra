@@ -1,10 +1,10 @@
 import React from 'react';
-import SpeakerCicle from './speaker-circle';
+import SpeakerCircle from './speaker-circle';
 
 export default {
   title: 'Speaker-Circle',
-  component: SpeakerCicle
+  component: SpeakerCircle
 };
 
-export const Normal = () => <SpeakerCicle isSelected={false} />;
-export const Selected = () => <SpeakerCicle isSelected />;
+export const Normal = () => <SpeakerCircle isSelected={false} />;
+export const Selected = () => <SpeakerCircle isSelected />;
