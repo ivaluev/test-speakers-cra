@@ -21,6 +21,8 @@ const Sidebar = styled.aside`
   width: 27%;
   min-width: 300px;
   background-color: #dcdcdc45;
+  /* background-color: #252526; */
+  /* color: white; */
   border-right: 1px solid #eee;
 `;
 

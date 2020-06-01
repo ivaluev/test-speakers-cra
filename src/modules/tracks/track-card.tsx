@@ -71,8 +71,8 @@ const TrackInfoName = styled.h3`
 `;
 
 const TrackHandleCol = styled.div`
-  width: 2em;
-  padding-left: 1rem;
+  width: 2.7em;
+  padding: 0 1rem;
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -93,8 +93,8 @@ const TrackHandle = styled.span`
     border-radius: 50%;
     background-color: red;
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: 12px;
+    /* left: 16px; */
   }
   &:after {
     content: '';
@@ -103,8 +103,8 @@ const TrackHandle = styled.span`
     border-radius: 50%;
     background-color: red;
     position: absolute;
-    bottom: 16px;
-    left: 16px;
+    bottom: 12px;
+    /* left: 16px; */
   }
 `;
 
