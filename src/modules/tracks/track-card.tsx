@@ -115,10 +115,11 @@ const TrackCardWrapper = styled.li`
   &:first-of-type {
     margin-top: 0;
   }
-  box-shadow: 0 1px 2px #ccc;
+  /* box-shadow: 0 1px 2px #ccc; */
   /* &:hover {
     box-shadow: 0 2px 8px #bbb;
   } */
   display: flex;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #202F3C;
 `;

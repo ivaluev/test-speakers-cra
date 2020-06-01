@@ -20,16 +20,16 @@ export default function App() {
 const Sidebar = styled.aside`
   width: 27%;
   min-width: 300px;
-  background-color: #dcdcdc45;
-  /* background-color: #252526; */
-  /* color: white; */
+  /* background-color: #dcdcdc45; */
+  background-color: #1B2126;
+  color: white;
   border-right: 1px solid #eee;
 `;
 
 const Main = styled.main`
   flex: 1;
   border-left: 1px solid #eee;
-  box-shadow: -2px 0 6px rgb(204, 204, 204);
+  /* box-shadow: -2px 0 6px rgb(204, 204, 204); */
   position: relative;
   user-select: none;
 `;
