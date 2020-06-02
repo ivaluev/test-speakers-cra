@@ -23,6 +23,9 @@ export default function TrackCard({
     return result;
   });
 
+  function onChange(volume: number) {
+  }
+
   return (
     <TrackCardWrapper>
       <TrackHandleCol >
@@ -30,7 +33,7 @@ export default function TrackCard({
       </TrackHandleCol>
       <TrackInfoCol>
         <TrackInfoName>{track.url}</TrackInfoName>
-        <Slider trackId={track.id} vol={track.vol} />
+        <Slider volume={track.vol} onChange={onChange} />
       </TrackInfoCol>
       <TrackAssignedCol>
         <AssignedInfo>

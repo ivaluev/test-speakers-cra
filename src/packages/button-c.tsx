@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ButtonC = styled.div`
+export const ButtonC = styled.span`
   position: relative;
   width: 36px;
   height: 36px;

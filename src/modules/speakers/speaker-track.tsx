@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Track } from '../../data/tracks/types';
 import styled from '@emotion/styled';
 import Slider from '../../packages/slider';
+import ButtonCPlay from '../../packages/button-c-play';
+import ButtonCDelete from '../../packages/button-c-delete';
 
 export interface SpeakerTrackProps {
   track: Track
@@ -10,13 +12,19 @@ export interface SpeakerTrackProps {
 export default function SpeakerTrack({
   track
 }: SpeakerTrackProps) {
+
+  // we load default volume for a track but keep ours in local track state
+  // but what if we switch to another page and then return? our volume should be persisted!
+  // now we also loose assined tracks!
+  const [volume, setVolume] = useState(track.vol);
+
   return (
     <Wrapper>
       <TrackName>{track.url}</TrackName>
-      <TrackVol><Slider trackId={track.id} vol={track.vol} /></TrackVol>
+      <TrackVol><Slider volume={volume} onChange={setVolume} /></TrackVol>
       <TrackActions>
-        <span>BP</span>
-        <span>DL</span>
+        <ButtonCPlay />
+        <ButtonCDelete />
       </TrackActions>
     </Wrapper>
   );
@@ -39,5 +47,10 @@ const TrackVol = styled.div`
 `;
 
 const TrackActions = styled.div`
-  flex: 0 0 60px;
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 90px;
+  & > * {
+    margin-left: 0.7em;
+  }
 `;

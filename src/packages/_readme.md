@@ -1,0 +1,1 @@
+package based components may only have local or no state at all

@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 type Props = {
-  trackId: number,
-  vol: number
+  volume: number,
+  onChange: (volume: number) => void
 }
 
 export default function Slider({
-  trackId,
-  vol
+  volume,
+  onChange
 }: Props) {
-
-  const [volume, setVolume] = useState(vol);
 
   return (
     <SliderWrapper>
@@ -21,7 +19,7 @@ export default function Slider({
         min="0" 
         max="1" 
         value={volume} 
-        onChange={e => setVolume(+e.target.value)} 
+        onChange={e => onChange(+e.target.value)} 
         id="myRange" 
         step="0.1" 
       />
