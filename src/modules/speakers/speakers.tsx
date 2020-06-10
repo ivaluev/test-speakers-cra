@@ -1,13 +1,29 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 import AppSpeaker from './speaker';
 import { RootState } from '../../data/store';
 import { Speaker } from '../../data/speakers/types';
 import { Dispatch } from 'redux';
-import { speakersRequest } from '../../data/speakers/actions';
+import { speakersRequest, actionSpeakersSelect } from '../../data/speakers/actions';
 import styled from '@emotion/styled';
 import Separator from '../../packages/separator';
 import { Header } from '../../packages/header';
+import SpeakerSelection from './speaker-selection';
+import useKeyPressedMonitor from '../../utils/useKeyPressedMonitor';
+
+export class SpeakerRectInfo {
+  public id: number;
+  public domRect: DOMRect;
+  constructor(
+    id: number,
+    domRect: DOMRect
+  ) {
+    this.id = id;
+    this.domRect = domRect;
+
+    console.log('speaker rect info created');
+  }
+}
 
 type Props = {
   speakers: Speaker[]
@@ -15,7 +31,34 @@ type Props = {
 };
 
 function AppSpeakers({ speakers, dispatch }: Props) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  // console.log('app speakers run', speakers);
+  const isShiftPressed = useKeyPressedMonitor(16);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // speakers are kept in store - so assigning them info will trigger a rerender
+  const speakersRectInfo = useRef<SpeakerRectInfo[]>([]);
+
+  // const [selectionVisible, setSelectionVisible] = useState(false);
+  // const mouseDown = useRef(false);
+
+  // function setMouseDown(down: boolean) {
+  //   mouseDown.current = down;
+  //   console.log('mouseDown', mouseDown.current);
+  //   if (mouseDown.current) {
+  //     setTimeout(() => {
+  //       if (mouseDown.current) {
+  //         console.log(mouseDown.current ? 'DOWN' : 'UP');
+  //         setSelectionVisible(true);
+  //       } else {
+  //         // setSelectionVisible(false);
+  //       }
+  //     }, 1500);
+  //   }
+  // }
+
+  function deselectAll() {
+    // will fire on up...
+    dispatch(actionSpeakersSelect([], false));
+  }
 
   useEffect(() => {
     let w = 0, h = 0;
@@ -23,31 +66,37 @@ function AppSpeakers({ speakers, dispatch }: Props) {
       w = wrapperRef.current.clientWidth - 70;
       h = wrapperRef.current.clientHeight - 70;
     }
-    console.log('size', w, h);
+    console.log('speakers map size', w, h);
     dispatch(speakersRequest(w, h));
-  }, [dispatch]);
+  }, []); // eslint-disable-line
 
   return (
     <Wrapper>
       <Header>Speakers</Header>
       <Separator />
-      <SpeakersWrapper ref={wrapperRef}>
-        {speakers.map(s => <AppSpeaker key={s.id} speaker={s} />)}
-      </SpeakersWrapper>
+      <SpeakersMapWrapper 
+        ref={wrapperRef} 
+        onClick={deselectAll} 
+        // onMouseDown={() => setMouseDown(true)}
+        // onMouseUp={() => setMouseDown(false)}
+      >
+        {speakers.map(s => <AppSpeaker 
+          key={s.id} 
+          speaker={s} 
+          speakersRectInfo={speakersRectInfo.current} 
+        />)}
+        {speakers.length > 0 && isShiftPressed && <SpeakerSelection speakersRectInfo={speakersRectInfo.current} />}
+      </SpeakersMapWrapper>
     </Wrapper>
   );
 }
 
-const SpeakersWrapper = styled.div`
+const SpeakersMapWrapper = styled.div`
   position: relative;
   flex: 1 1 auto;
   background-size: 100px 100px;
   background-image: radial-gradient(circle, #575757 1px, rgba(0, 0, 0, 0) 1px);
   overflow: hidden;
-  /* background-size: 100px 100px;
-  background-image:
-    linear-gradient(to right, rgb(228, 228, 228) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(228, 228, 228) 1px, transparent 1px); */
 `;
 
 const Wrapper = styled.div`

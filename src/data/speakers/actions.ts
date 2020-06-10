@@ -23,3 +23,8 @@ export const actionSpeakerPlaylistPlay = createAction(
   'SPEAKER_PLAY',
   (id: number, isPlaying: boolean) => ({id, isPlaying})
 )();
+
+export const actionSpeakerSetTrackVol = createAction(
+  'SPEAKER_TRACK_VOL_SET',
+  (speakerId: number, trackId: number, vol: number) => ({speakerId, trackId, vol})
+)();

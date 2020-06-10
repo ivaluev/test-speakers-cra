@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Track } from '../../data/tracks/types';
 import styled from '@emotion/styled';
 import Slider from '../../packages/slider';
 import ButtonCPlay from '../../packages/button-c-play';
 import ButtonCDelete from '../../packages/button-c-delete';
+import { useAppSelector } from '../../data/store';
+import { actionSpeakerSetTrackVol } from '../../data/speakers/actions';
+import { useDispatch } from 'react-redux';
 
 export interface SpeakerTrackProps {
-  track: Track
+  speakerId: number,
+  trackId: number
 }
 
 export default function SpeakerTrack({
-  track
+  speakerId,
+  trackId
 }: SpeakerTrackProps) {
 
   // we load default volume for a track but keep ours in local track state
   // but what if we switch to another page and then return? our volume should be persisted!
   // now we also loose assined tracks!
-  const [volume, setVolume] = useState(track.vol);
+  const trackVol = useAppSelector(state => state.speakers
+    .speakers.find(s => s.id === speakerId)!
+    .tracks.find(t => t.id === trackId)!).vol;
+  const trackUrl = useAppSelector(state => state.speakers
+    .speakers.find(s => s.id === speakerId)!
+    .tracks.find(t => t.id === trackId)!).url;
 
+  const dispatch = useDispatch();
+
+  const setTrackVol = useCallback((vol: number) => {
+    dispatch(actionSpeakerSetTrackVol(speakerId, trackId, vol));
+  }, [speakerId, trackId, dispatch]);
+
+  console.log('SpeakerTrack vol', trackVol);
+  
   return (
     <Wrapper>
-      <TrackName>{track.url}</TrackName>
-      <TrackVol><Slider volume={volume} onChange={setVolume} /></TrackVol>
+      <TrackName>{trackUrl}</TrackName>
+      <TrackVol><Slider volume={trackVol} onChange={setTrackVol} /></TrackVol>
       <TrackActions>
         <ButtonCPlay />
         <ButtonCDelete />

@@ -13,7 +13,7 @@ export default function Slider({
 
   return (
     <SliderWrapper>
-      <p>volume:</p>
+      <p>volume: {volume}</p>
       <SliderInput 
         type="range" 
         min="0" 
@@ -31,6 +31,10 @@ const SliderWrapper = styled.span`
   display: inline-block;
   width: 100%;
   margin-top: .7rem;
+  & > p {
+    font-size: smaller;
+    color: #cddc39;
+  }
 `;
 
 const SliderInput = styled.input`

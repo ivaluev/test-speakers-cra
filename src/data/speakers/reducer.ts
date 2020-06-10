@@ -1,6 +1,8 @@
 import { ActionType, isActionOf } from 'typesafe-actions';
 import { SpeakersState } from './types';
 import * as actions from './actions';
+import { Track } from '../tracks/types';
+import speakers from '../../modules/speakers/speakers';
 
 export function speakersReducer(
   state: SpeakersState = { loading: false, speakers: [], speakersSelected: [] },
@@ -32,16 +34,37 @@ export function speakersReducer(
 
   if (isActionOf(actions.actionTrackAssign, action)) {
     const speakersUpdated = [...state.speakers];
+    const trackAssignedCloned: Track = { ...action.payload };
 
-    for (const s of speakersUpdated) {
-      if (state.speakersSelected.includes(s.id)) {
+    for (const selectedSpeakerId of state.speakersSelected) {
+
+      // we want to replace entirely if one exist
+      const speakerSelectedIndex = speakersUpdated.findIndex(s => s.id === selectedSpeakerId);
       
-        if (!s.tracks.some(t => t.id === action.payload.id)) {
-          s.tracks = [...s.tracks, action.payload];
-        }
+      // record new speaker into slot
+      speakersUpdated[speakerSelectedIndex] = {...speakersUpdated[speakerSelectedIndex]};
+      
+      // get clone of speaker
+      const speakerSelectedCloned = speakersUpdated[speakerSelectedIndex];
+
+      const speakerSelectedTracksCloned = [...speakerSelectedCloned.tracks];
+
+      // record new tracks array into speaker
+      speakerSelectedCloned.tracks = speakerSelectedTracksCloned;
+
+      const speakerSelectedTrackIndex = speakerSelectedTracksCloned.findIndex(t => t.id === trackAssignedCloned.id);
+
+      if (speakerSelectedTrackIndex === -1) {
+        
+        // no track exist => add
+        speakerSelectedTracksCloned.push(trackAssignedCloned);
+      } else {
+        
+        // track exist => replace
+        speakerSelectedTracksCloned[speakerSelectedTrackIndex] = trackAssignedCloned;
       }
     }
-    return { ...state, speakers: speakersUpdated };
+    return {...state, speakers: speakersUpdated};
   }
 
   if (isActionOf(actions.actionSpeakerPlaylistPlay, action)) {
@@ -51,6 +74,14 @@ export function speakersReducer(
       target.isPlaying = action.payload.isPlaying;
     }
     return { ...state, speakers: speakersUpdated };
+  }
+
+  if (isActionOf(actions.actionSpeakerSetTrackVol, action)) {
+    const speakersUpdated = [...state.speakers];
+    const speakerUpdated = speakersUpdated.find(s => s.id === action.payload.speakerId)!;
+    speakerUpdated.tracks = [...speakerUpdated.tracks];
+    speakerUpdated.tracks.find(t => t.id === action.payload.trackId)!.vol = action.payload.vol;
+    return {...state, speakers: speakersUpdated};
   }
 
   return state;

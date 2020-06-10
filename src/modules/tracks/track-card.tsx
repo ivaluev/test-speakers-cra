@@ -1,5 +1,4 @@
-import React from 'react';
-import { Track } from '../../data/tracks/types';
+import React, { useCallback } from 'react';
 import styled from '@emotion/styled';
 import Slider from '../../packages/slider';
 import { Label } from '../../packages/label';
@@ -7,24 +6,44 @@ import { Button } from '../../packages/button-r-primary';
 import { useDispatch } from 'react-redux';
 import { actionTrackAssign } from '../../data/speakers/actions';
 import { useAppSelector } from '../../data/store';
+import { actionTrackUpdate } from '../../data/tracks/actions';
 
 type Props = {
-  track: Track
+  trackId: number
 }
 
 export default function TrackCard({
-  track
+  trackId
 } : Props) {
   const dispatch = useDispatch();
-  const assignedToCount = useAppSelector<number>(state => {
+  
+  const track = useAppSelector(s => s.tracks.tracks
+    .find(t => t.id === trackId))!;
+
+  const assignedToCount = useAppSelector(state => {
     const result = state.speakers.speakers
-      .filter(s => s.tracks.some(t => t.id === track.id)) 
+      .filter(s => s.tracks.some(t => t.id === trackId)) 
       .length;
     return result;
   });
+  
+  const selectionCount = useAppSelector(st => st.speakers.speakersSelected.length);
+  const selectionCountWithTrackAssigned = useAppSelector(state => state.speakers.speakers
+      .filter(s => state.speakers.speakersSelected.includes(s.id))
+      .filter(s => s.tracks.some(t => t.id === trackId))
+      .length
+  );
+
+  const assignDisabled = selectionCount === 0 || selectionCount === selectionCountWithTrackAssigned;
 
   function onChange(volume: number) {
+    dispatch(actionTrackUpdate({ ...track, vol: volume }));
   }
+
+  const assignTrack = useCallback(() => {
+    console.log('assined track', track);
+    dispatch(actionTrackAssign(track));
+  }, [track]); // eslint-disable-line
 
   return (
     <TrackCardWrapper>
@@ -40,12 +59,12 @@ export default function TrackCard({
           Назначен на <Label>{assignedToCount}</Label>
         </AssignedInfo>
         <AssignActions>
-          <Button onClick={() => dispatch(actionTrackAssign(track))}>Назначить</Button>
+          <Button onClick={assignTrack} disabled={assignDisabled}>Назначить</Button>
         </AssignActions>
       </TrackAssignedCol>
     </TrackCardWrapper>
   );
-}
+};
 
 const AssignActions = styled.div`
   text-align: right;

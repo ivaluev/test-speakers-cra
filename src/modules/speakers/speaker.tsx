@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Dispatch } from 'redux';
 import { Speaker, Offset } from '../../data/speakers/types';
@@ -15,9 +15,11 @@ import ButtonCPlay from '../../packages/button-c-play';
 import ButtonCMenu from '../../packages/button-c-menu';
 import ButtonCStop from '../../packages/button-c-stop';
 import SpeakerCircle from './speaker-circle';
+import { SpeakerRectInfo } from './speakers';
 
 type Props = {
   speaker: Speaker,
+  speakersRectInfo: SpeakerRectInfo[]
   tracksLength: number,
   isSelected: boolean,
   isPlaying: boolean,
@@ -26,33 +28,56 @@ type Props = {
 
 function AppSpeaker({ 
   speaker, 
+  speakersRectInfo,
   tracksLength, 
   isSelected, 
   isPlaying,
-  dispatch 
+  dispatch
 }: Props) {
+  const speakerWrapperRef = useRef<HTMLDivElement>(null);
   const { renderModalContent } = useContext(ModalContext);
   const { coord } = speaker;
   const showButtons = tracksLength > 0 && isSelected;
 
+  // console.log('speaker is selected', speaker.id, isSelected);
+  
+
   function toggleSpeakerSelection(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    const isShiftPressed = e.shiftKey;
+    e.stopPropagation();
+    const isCtrlPressed = e.ctrlKey;
 
     isSelected
       ? dispatch(actionSpeakersDelelect([speaker.id]))
-      : dispatch(actionSpeakersSelect([speaker.id], isShiftPressed));
+      : dispatch(actionSpeakersSelect([speaker.id], isCtrlPressed));
   }
 
-  function openModal() {
-    renderModalContent(<SpeakerInfo speaker={speaker} />);
-  }
+  const openModal = useCallback((e: React.MouseEvent) => {
+    console.log('openModal speaker', speaker);
+   
+    renderModalContent(<SpeakerInfo speakerId={speaker.id} />);
+  }, [speaker, renderModalContent]); // eslint-disable-line
 
   function togglePlay() {
     dispatch(actionSpeakerPlaylistPlay(speaker.id, !isPlaying));
   }
 
+  useEffect(() => {
+    if (!speakerWrapperRef.current) {
+      throw new Error('unvalid speakerWrapperRef');
+    } 
+    // this is a viewport DomRect - whereas we want relative to our div 
+    const domRect: DOMRect = new DOMRect(
+      coord[0], 
+      coord[1], 
+      100,
+      100
+    ); //speakerWrapperRef.current.getBoundingClientRect();
+    speakersRectInfo.push(new SpeakerRectInfo(speaker.id, domRect));
+  }, []); // eslint-disable-line
+
   return (
-    <AppSpeakerWrapper
+    <SpeakerWrapper
+      ref={speakerWrapperRef}
       w={coord[0]}
       h={coord[1]}
     >
@@ -65,7 +90,7 @@ function AppSpeaker({
         : <ButtonPlayPositioned onClick={togglePlay} />)
       }
       {showButtons && <ButtonMenuPositioned onClick={openModal} />}
-    </AppSpeakerWrapper>
+    </SpeakerWrapper>
   );
 }
 
@@ -95,7 +120,7 @@ const ButtonMenuPositioned = styled(ButtonCMenu)`
   right: -15px;
 `;
 
-const AppSpeakerWrapper = styled.div<Offset>`
+const SpeakerWrapper = styled.div<Offset>`
   position: absolute;
   display: flex;
   justify-content: center;

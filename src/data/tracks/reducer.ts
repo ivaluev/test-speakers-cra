@@ -18,5 +18,14 @@ export function tracksReducer(
     return { ...state, loading: false, error: action.payload };
   }
 
+  /** @action - already destructured */
+  if (isActionOf(actions.actionTrackUpdate, action)) {
+    const trackUpdatedIndex = state.tracks.findIndex(i => i.id === action.payload.id);
+    if (trackUpdatedIndex !== -1) {
+      state.tracks[trackUpdatedIndex] = action.payload;
+      return state;
+    }
+  }
+
   return state;
 }

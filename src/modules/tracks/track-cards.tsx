@@ -21,7 +21,7 @@ export default function TrackCards() {
       <Header>Tracks</Header>
       <Separator />
       <TracksList>
-        {tracks.map(t => <TrackCard key={t.id} track={t} />)}
+        {tracks.map(t => <TrackCard key={t.id} trackId={t.id} />)}
       </TracksList>
     </Wrapper>
   );

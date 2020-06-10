@@ -16,9 +16,14 @@ export default function SpeakerCircle({
 }: PropsSelected & PropsOnClick) {
   return (
     <Container onClick={onClick}>
-      <CircleGlow delay={-3} isSelected={isSelected} />
-      <CircleGlow delay={-2} isSelected={isSelected} />
-      <CircleGlow delay={-1} isSelected={isSelected} />
+      {!isSelected && 
+        <>
+          <CircleGlow delay={-3} isSelected={isSelected} />
+          <CircleGlow delay={-2} isSelected={isSelected} />
+          <CircleGlow delay={-1} isSelected={isSelected} />
+          <CircleGlow delay={0} isSelected={isSelected} />
+        </>
+      }
       <CircleOuter isSelected={isSelected}>
         <CircleKnob />
       </CircleOuter>
@@ -66,7 +71,6 @@ const CircleKnob = styled.div`
   height: 20px;
   border-radius: 50%;
   background: radial-gradient(${COL_2}, ${darken(0.1, COL_1)} 70%);
-  /* border: 1px solid #666; */
 `;
 
 const scaleIn = keyframes`
@@ -94,5 +98,5 @@ const CircleGlow = styled.div<PropsDelay & PropsSelected>`
   opacity: 0;
   animation: ${scaleIn} 4s infinite cubic-bezier(.36, .11, .89, .32);
   animation-delay: ${props => props.delay}s;
-  animation-play-state: ${props => props.isSelected ? 'paused' : 'initial'};
+  /* animation-play-state: ${props => props.isSelected ? 'paused' : 'initial'}; */
 `;
