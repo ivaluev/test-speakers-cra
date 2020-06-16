@@ -57,7 +57,8 @@ function AppSpeaker({
     renderModalContent(<SpeakerInfo speakerId={speaker.id} />);
   }, [speaker, renderModalContent]); // eslint-disable-line
 
-  function togglePlay() {
+  function togglePlay(e: React.MouseEvent) {
+    e.stopPropagation();
     dispatch(actionSpeakerPlaylistPlay(speaker.id, !isPlaying));
   }
 
