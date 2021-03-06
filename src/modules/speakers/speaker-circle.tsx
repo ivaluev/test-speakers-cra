@@ -3,7 +3,7 @@ import { PropsSelected, PropsDelay } from '../../types';
 import styled from '@emotion/styled';
 import { lighten, darken } from 'polished';
 import { keyframes } from '@emotion/core';
-import { PropsOnClick } from '../../packages/types';
+import { PropsOnClick } from '../../common/types';
 
 const COL_1 = '#0099ff';
 const COL_2 = '#d0e7f6';

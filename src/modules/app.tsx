@@ -1,7 +1,7 @@
 import React from 'react';
 import AppSpeakers from './speakers/speakers';
 import TrackCards from './tracks/track-cards';
-import { ModalProvider } from '../packages/modal/modal';
+import { ModalProvider } from '../common/modal/modal';
 import styled from '@emotion/styled';
 
 export default function App() {

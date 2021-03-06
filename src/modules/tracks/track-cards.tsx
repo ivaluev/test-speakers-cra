@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../data/store';
-import { actionTracksRequest } from '../../data/tracks/actions';
-import { Track } from '../../data/tracks/types';
-import Separator from '../../packages/separator';
+import { useAppSelector } from '../../store';
+import { actionTracksRequest } from '../../store/tracks/actions';
+import { Track } from '../../store/tracks/types';
+import Separator from '../../common/separator';
 import TrackCard from './track-card';
-import { Header } from '../../packages/header';
+import { Header } from '../../common/header';
 
 export default function TrackCards() {
   const dispatch = useDispatch();

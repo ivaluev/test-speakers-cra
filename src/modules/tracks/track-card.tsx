@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from '@emotion/styled';
-import Slider from '../../packages/slider';
-import { Label } from '../../packages/label';
-import { Button } from '../../packages/button-r-primary';
+import Slider from '../../common/slider';
+import { Label } from '../../common/label';
+import { Button } from '../../common/button-r-primary';
 import { useDispatch } from 'react-redux';
-import { actionTrackAssign } from '../../data/speakers/actions';
-import { useAppSelector } from '../../data/store';
-import { actionTrackUpdate } from '../../data/tracks/actions';
+import { actionTrackAssign } from '../../store/speakers/actions';
+import { useAppSelector } from '../../store';
+import { actionTrackUpdate } from '../../store/tracks/actions';
 
 type Props = {
   trackId: number

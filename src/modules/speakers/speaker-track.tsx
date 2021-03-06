@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { Track } from '../../data/tracks/types';
+import { Track } from '../../store/tracks/types';
 import styled from '@emotion/styled';
-import Slider from '../../packages/slider';
-import ButtonCPlay from '../../packages/button-c-play';
-import ButtonCDelete from '../../packages/button-c-delete';
-import { useAppSelector } from '../../data/store';
-import { actionSpeakerSetTrackVol } from '../../data/speakers/actions';
+import Slider from '../../common/slider';
+import ButtonCPlay from '../../common/button-c-play';
+import ButtonCDelete from '../../common/button-c-delete';
+import { useAppSelector } from '../../store';
+import { actionSpeakerSetTrackVol } from '../../store/speakers/actions';
 import { useDispatch } from 'react-redux';
 
 export interface SpeakerTrackProps {

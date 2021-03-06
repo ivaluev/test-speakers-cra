@@ -1,9 +1,9 @@
 import React from 'react';
-import { ModalHeader, ModalBody, ModalContainer } from '../../packages/modal';
+import { ModalHeader, ModalBody, ModalContainer } from '../../common/modal';
 import SpeakerTrack from './speaker-track';
-import { RootState, useAppSelector } from '../../data/store';
+import { RootState, useAppSelector } from '../../store';
 import { connect, useSelector } from 'react-redux';
-import { Track } from '../../data/tracks/types';
+import { Track } from '../../store/tracks/types';
 
 
 export interface SpeakerInfoProps {

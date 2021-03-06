@@ -1,4 +1,4 @@
-import { Track } from '../data/tracks/types';
+import { Track } from '../store/tracks/types';
 import { delay } from '../utils/delay';
 
 export async function getTracks(): Promise<Track[]> {

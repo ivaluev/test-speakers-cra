@@ -5,7 +5,7 @@ import React, { useRef, useEffect } from 'react';
 import { SpeakerRectInfo } from './speakers';
 import { isInside } from '../../utils/intersection';
 import { useDispatch } from 'react-redux';
-import { actionSpeakersSelect } from '../../data/speakers/actions';
+import { actionSpeakersSelect } from '../../store/speakers/actions';
 import { MouseEventType } from '../../types';
 
 export interface SelectionRectProps {

@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useRef, useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Dispatch } from 'redux';
-import { Speaker, Offset } from '../../data/speakers/types';
+import { Speaker, Offset } from '../../store/speakers/types';
 import { connect } from 'react-redux';
 import { 
   actionSpeakersSelect, 
   actionSpeakersDelelect, 
   actionSpeakerPlaylistPlay 
-} from '../../data/speakers/actions';
-import { RootState } from '../../data/store';
-import { ModalContext } from '../../packages/modal/modal';
+} from '../../store/speakers/actions';
+import { RootState } from '../../store';
+import { ModalContext } from '../../common/modal/modal';
 import SpeakerInfo from './speaker-info';
-import ButtonCPlay from '../../packages/button-c-play';
-import ButtonCMenu from '../../packages/button-c-menu';
-import ButtonCStop from '../../packages/button-c-stop';
+import ButtonCPlay from '../../common/button-c-play';
+import ButtonCMenu from '../../common/button-c-menu';
+import ButtonCStop from '../../common/button-c-stop';
 import SpeakerCircle from './speaker-circle';
 import { SpeakerRectInfo } from './speakers';
 

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 import AppSpeaker from './speaker';
-import { RootState } from '../../data/store';
-import { Speaker } from '../../data/speakers/types';
+import { RootState } from '../../store';
+import { Speaker } from '../../store/speakers/types';
 import { Dispatch } from 'redux';
-import { speakersRequest, actionSpeakersSelect } from '../../data/speakers/actions';
+import { speakersRequest, actionSpeakersSelect } from '../../store/speakers/actions';
 import styled from '@emotion/styled';
-import Separator from '../../packages/separator';
-import { Header } from '../../packages/header';
+import Separator from '../../common/separator';
+import { Header } from '../../common/header';
 import SpeakerSelection from './speaker-selection';
 import useKeyPressedMonitor from '../../utils/useKeyPressedMonitor';
 

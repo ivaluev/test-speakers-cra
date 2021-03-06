@@ -1,4 +1,4 @@
-import { Speaker } from '../data/speakers/types';
+import { Speaker } from '../store/speakers/types';
 import { delay } from '../utils/delay';
 
 function snapToGrid(offset: number, range: number) {
