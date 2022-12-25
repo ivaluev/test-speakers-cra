@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import './index.css'
-import './index.svg'
+// import './index.svg'
 import App from './modules/app'
 import * as serviceWorker from './serviceWorker'
 import {configureStore} from './store'

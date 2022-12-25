@@ -7,10 +7,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "lint-fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
+    "story": "start-storybook -p 9009 -s public",
+    "story:build": "build-storybook -s public",
     "pretty": "prettier --end-of-line auto -w \"**/*.{js,ts,jsx,tsx}\""
   },
   "dependencies": {

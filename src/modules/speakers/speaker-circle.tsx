@@ -1,6 +1,8 @@
 import {keyframes} from '@emotion/react'
 import styled from '@emotion/styled'
 import {darken, lighten} from 'polished'
+import {PropsOnClick} from "../../common/types"
+import {PropsDelay, PropsSelected} from "../../types"
 
 const COL_1 = '#0099ff'
 const COL_2 = '#d0e7f6'
