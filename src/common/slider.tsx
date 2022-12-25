@@ -1,41 +1,36 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 type Props = {
-  volume: number,
+  volume: number
   onChange: (volume: number) => void
 }
 
-export default function Slider({
-  volume,
-  onChange
-}: Props) {
-
+export default function Slider({volume, onChange}: Props) {
   return (
     <SliderWrapper>
       <p>volume: {volume}</p>
-      <SliderInput 
-        type="range" 
-        min="0" 
-        max="1" 
-        value={volume} 
-        onChange={e => onChange(+e.target.value)} 
-        id="myRange" 
-        step="0.1" 
+      <SliderInput
+        type="range"
+        min="0"
+        max="1"
+        value={volume}
+        onChange={e => onChange(+e.target.value)}
+        id="myRange"
+        step="0.1"
       />
     </SliderWrapper>
-  );
+  )
 }
 
 const SliderWrapper = styled.span`
   display: inline-block;
   width: 100%;
-  margin-top: .7rem;
+  margin-top: 0.7rem;
   & > p {
     font-size: smaller;
     color: #cddc39;
   }
-`;
+`
 
 const SliderInput = styled.input`
   -webkit-appearance: none;
@@ -45,16 +40,16 @@ const SliderInput = styled.input`
   height: 4px;
   background: #d3d3d3;
   outline: none;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
   border-radius: 4px;
   &::-webkit-slider-thumb {
     cursor: w-resize;
     appearance: none;
     width: 15px;
     height: 15px;
-    background: #008EFF;
+    background: #008eff;
     /* background-color: #E91E63; */
     border-radius: 50%;
     /* cursor: pointer; */
   }
-`;
+`

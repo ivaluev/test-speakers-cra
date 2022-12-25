@@ -1,50 +1,51 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import ButtonClose from '../button-close/button-close';
-import './modal.scss';
-import { CSSTransition } from 'react-transition-group';
+import React, {useState} from 'react'
+import ReactDOM from 'react-dom'
+import {CSSTransition} from 'react-transition-group'
+import ButtonClose from '../button-close/button-close'
+import './modal.scss'
 
 export class ModelContextApi {
-  public renderModalContent: (content: React.ReactNode) => void =
-    () => { throw new Error('Not Implemented.'); }
+  public renderModalContent: (content: React.ReactNode) => void = () => {
+    throw new Error('Not Implemented.')
+  }
 }
 
-export const ModalContext = React.createContext<ModelContextApi>(new ModelContextApi());
+export const ModalContext = React.createContext<ModelContextApi>(new ModelContextApi())
 
 interface ModalProviderProps {
   children: React.ReactNode
 }
 
-export function ModalProvider({ children }: ModalProviderProps) {
-  console.log('rendering modal provider...');
+export function ModalProvider({children}: ModalProviderProps) {
+  console.log('rendering modal provider...')
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [content, setContent] = useState<React.ReactNode>();
+  const [isOpen, setIsOpen] = useState(false)
+  const [content, setContent] = useState<React.ReactNode>()
 
   function renderModalContent(content: React.ReactNode) {
-    setContent(content);
-    setIsOpen(true);
+    setContent(content)
+    setIsOpen(true)
   }
   function close() {
-    console.log('closing...');
-    setIsOpen(false);
+    console.log('closing...')
+    setIsOpen(false)
   }
   return (
-    <ModalContext.Provider value={{ renderModalContent }}>
+    <ModalContext.Provider value={{renderModalContent}}>
       <Modal isOpen={isOpen} content={content} close={close} />
       {children}
     </ModalContext.Provider>
-  );
+  )
 }
 
 interface ModalProps {
-  isOpen: boolean;
-  content: React.ReactNode;
-  close: () => void;
+  isOpen: boolean
+  content: React.ReactNode
+  close: () => void
 }
 
-function Modal({ isOpen, content, close }: ModalProps) {
-  console.log('rendering portal modal...');
+function Modal({isOpen, content, close}: ModalProps) {
+  console.log('rendering portal modal...')
 
   return ReactDOM.createPortal(
     <CSSTransition
@@ -54,7 +55,7 @@ function Modal({ isOpen, content, close }: ModalProps) {
         enterDone: 'modal_enter-done',
         exit: 'modal_exit',
         exitActive: 'modal_exit-active',
-        exitDone: 'modal_exit-done'
+        exitDone: 'modal_exit-done',
       }}
       in={isOpen}
       timeout={300}
@@ -65,8 +66,7 @@ function Modal({ isOpen, content, close }: ModalProps) {
           {content}
         </div>
       </div>
-    </CSSTransition>
-    ,
+    </CSSTransition>,
     document.querySelector('#modal-root')!
-  );
+  )
 }

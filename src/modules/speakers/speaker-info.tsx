@@ -1,34 +1,26 @@
-import React from 'react';
-import { ModalHeader, ModalBody, ModalContainer } from '../../common/modal';
-import SpeakerTrack from './speaker-track';
-import { RootState, useAppSelector } from '../../store';
-import { connect, useSelector } from 'react-redux';
-import { Track } from '../../store/tracks/types';
-
+import {ModalBody, ModalContainer, ModalHeader} from '../../common/modal'
+import {useAppSelector} from '../../store'
+import SpeakerTrack from './speaker-track'
 
 export interface SpeakerInfoProps {
-  speakerId: number;
+  speakerId: number
 }
 
-export default function SpeakerInfo({
-  speakerId,
-}: SpeakerInfoProps) {
-
-  const speakerTracks = useAppSelector(state => state.speakers
-    .speakers.find(s => s.id === speakerId)!
-    .tracks);
+export default function SpeakerInfo({speakerId}: SpeakerInfoProps) {
+  const speakerTracks = useAppSelector(
+    state => state.speakers.speakers.find(s => s.id === speakerId)!.tracks
+  )
 
   return (
     <ModalContainer>
       <ModalHeader>Speaker {speakerId} Tracks</ModalHeader>
       <ModalBody>
-        {speakerTracks.map(t => <SpeakerTrack 
-          key={t.id} 
-          speakerId={speakerId}
-          trackId={t.id} />)}
+        {speakerTracks.map(t => (
+          <SpeakerTrack key={t.id} speakerId={speakerId} trackId={t.id} />
+        ))}
       </ModalBody>
     </ModalContainer>
-  );
+  )
 }
 
 // export interface SpeakerInfoProps {
@@ -44,8 +36,8 @@ export default function SpeakerInfo({
 //     <ModalContainer>
 //       <ModalHeader>Speaker {speakerId} Tracks</ModalHeader>
 //       <ModalBody>
-//         {speakerTracks.map(t => <SpeakerTrack 
-//           key={t.id} 
+//         {speakerTracks.map(t => <SpeakerTrack
+//           key={t.id}
 //           speakerId={speakerId}
 //           trackId={t.id} />)}
 //       </ModalBody>

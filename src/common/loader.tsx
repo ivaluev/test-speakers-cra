@@ -1,7 +1,3 @@
-import React from 'react';
-
 export default function Loader() {
-  
-
-  return <div>Loader pure component</div>;
+  return <div>Loader pure component</div>
 }

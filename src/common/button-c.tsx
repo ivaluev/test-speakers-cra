@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 export const ButtonC = styled.span`
   position: relative;
@@ -12,4 +12,4 @@ export const ButtonC = styled.span`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-`;
+`

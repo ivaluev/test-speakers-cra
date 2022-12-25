@@ -1,30 +1,29 @@
-import { Speaker } from '../store/speakers/types';
-import { delay } from '../utils/delay';
+import {Speaker} from '../store/speakers/types'
+import {delay} from '../utils/delay'
 
 function snapToGrid(offset: number, range: number) {
-  const step = 100;
+  const step = 100
   const result = new Array(Math.floor(range / step))
     .fill(0)
     .map((_, i) => i * step)
-    .reduce((acc, cur) => Math.abs(cur - offset) < Math.abs(acc - offset) ? cur : acc);
-  return result;
+    .reduce((acc, cur) => (Math.abs(cur - offset) < Math.abs(acc - offset) ? cur : acc))
+  return result
 }
 
 function getPosition(w: number, h: number): [number, number] {
-  const wRand = snapToGrid(Math.floor(w * Math.random()), w) + 49;
-  const hRand = snapToGrid(Math.floor(h * Math.random()), h) + 50;
-  return [wRand, hRand];
+  const wRand = snapToGrid(Math.floor(w * Math.random()), w) + 49
+  const hRand = snapToGrid(Math.floor(h * Math.random()), h) + 50
+  return [wRand, hRand]
 }
 
 export async function getSpeakers(w: number, h: number): Promise<Speaker[]> {
-  return await delay(new Array(6)
-    .fill(undefined)
-    .map((v, i) => new Speaker(i, getPosition(w, h), [], false, null))
-  );
+  return await delay(
+    new Array(6).fill(undefined).map((v, i) => new Speaker(i, getPosition(w, h), [], false, null))
+  )
 }
 
 export async function postSpeaker(speaker: Speaker): Promise<Speaker> {
-  throw new Error('Not Implemented.');
+  throw new Error('Not Implemented.')
 }
 
 // Методы:
@@ -42,11 +41,10 @@ export async function postSpeaker(speaker: Speaker): Promise<Speaker> {
 // ]
 // }, …]
 
-// POST /api/speakers/<id> 
-// Сохранить один динамик 
+// POST /api/speakers/<id>
+// Сохранить один динамик
 // POST payload: Speaker
 // Ответ: Speaker
-
 
 // POST /api/speakers
 // Сохранить список динамиков

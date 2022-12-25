@@ -1,44 +1,48 @@
 /** @jsx jsx */
 
-import { useDispatch } from 'react-redux';
-import { actionSpeakersSelect } from '../../store/speakers/actions';
-import { MouseEventType } from '../../types';
-import { isInside } from '../../utils/intersection';
-import useMouseClickAndMoveObserver from '../../utils/useMouseClickAndMoveObserver';
-import { SpeakerRectInfo } from './speakers';
+import {useDispatch} from 'react-redux'
+import {actionSpeakersSelect} from '../../store/speakers/actions'
+import {MouseEventType} from '../../types'
+import {isInside} from '../../utils/intersection'
+import useMouseClickAndMoveObserver from '../../utils/useMouseClickAndMoveObserver'
+import {SpeakerRectInfo} from './speakers'
 
 export interface SelectionRectProps {
-  speakersRectInfo: SpeakerRectInfo[];
+  speakersRectInfo: SpeakerRectInfo[]
 }
 
-function SpeakerSelection({ speakersRectInfo }: SelectionRectProps) {
+function SpeakerSelection({speakersRectInfo}: SelectionRectProps) {
   // console.log('speakers selection render');
 
-  const dispatch = useDispatch();
-  const selectionAreaRef = useRef(null);
-  const selectionRectRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch()
+  const selectionAreaRef = useRef(null)
+  const selectionRectRef = useRef<HTMLDivElement>(null)
   // const selectedSpeakersSet = useRef<Set<number>>(null);
-  const { mouseState, mouseMovingRect } =
-    useMouseClickAndMoveObserver(selectionAreaRef);
+  const {mouseState, mouseMovingRect} = useMouseClickAndMoveObserver(selectionAreaRef)
 
   useEffect(() => {
     if (mouseState === MouseEventType.UP) {
-
       // console.log('SpeakerSelection.mouseUP effect', mouseMovingRect);
       // deselecting prev selection if any
-      dispatch(actionSpeakersSelect([], false));
+      dispatch(actionSpeakersSelect([], false))
       speakersRectInfo.forEach(speakerRectInfo => {
-        if (isInside(new DOMRect(
-          mouseMovingRect.left,
-          mouseMovingRect.top,
-          mouseMovingRect.width,
-          mouseMovingRect.height), speakerRectInfo.domRect)) {
-          console.log('is inside', speakerRectInfo.id);
-          dispatch(actionSpeakersSelect([speakerRectInfo.id], true));
-        } 
-      });
+        if (
+          isInside(
+            new DOMRect(
+              mouseMovingRect.left,
+              mouseMovingRect.top,
+              mouseMovingRect.width,
+              mouseMovingRect.height
+            ),
+            speakerRectInfo.domRect
+          )
+        ) {
+          console.log('is inside', speakerRectInfo.id)
+          dispatch(actionSpeakersSelect([speakerRectInfo.id], true))
+        }
+      })
     }
-  }, [mouseState]); // eslint-disable-line
+  }, [mouseState]) // eslint-disable-line
 
   return (
     <div
@@ -75,9 +79,8 @@ function SpeakerSelection({ speakersRectInfo }: SelectionRectProps) {
         `}
       ></div>
     </div>
-  );
+  )
 }
 
 // export default React.memo(SpeakerSelection);
-export default SpeakerSelection;
-
+export default SpeakerSelection

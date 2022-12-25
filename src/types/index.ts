@@ -13,5 +13,5 @@ export type PropsDisabled = {
 export enum MouseEventType {
   NONE = 0,
   DOWN = 1,
-  UP = 2
+  UP = 2,
 }

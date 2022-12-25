@@ -1,15 +1,14 @@
-import { getType } from 'typesafe-actions';
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { getSpeakers } from '../../api/speakers';
-import { Speaker } from './types';
-import { speakersRequest, actionSpeakersResponse } from './actions';
-
+import {call, put, takeLatest} from 'redux-saga/effects'
+import {getType} from 'typesafe-actions'
+import {getSpeakers} from '../../api/speakers'
+import {actionSpeakersResponse, speakersRequest} from './actions'
+import {Speaker} from './types'
 
 function* handleSpeakersRequest(action: ReturnType<typeof speakersRequest>) {
-  const speakers: Speaker[] = yield call(getSpeakers, action.payload.w, action.payload.h);
-  yield put(actionSpeakersResponse(speakers));
+  const speakers: Speaker[] = yield call(getSpeakers, action.payload.w, action.payload.h)
+  yield put(actionSpeakersResponse(speakers))
 }
 
 export function* speakersSaga() {
-  yield takeLatest(getType(speakersRequest), handleSpeakersRequest);
+  yield takeLatest(getType(speakersRequest), handleSpeakersRequest)
 }

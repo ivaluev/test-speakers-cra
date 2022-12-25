@@ -1,14 +1,14 @@
-import { Track } from '../tracks/types';
+import {Track} from '../tracks/types'
 
 export type Offset = {
-  w: number,
+  w: number
   h: number
 }
 
 export type SpeakersState = {
-  loading: boolean,
-  error?: string,
-  speakers: Speaker[],
+  loading: boolean
+  error?: string
+  speakers: Speaker[]
   speakersSelected: number[]
 }
 
@@ -24,6 +24,6 @@ export class Speaker {
 }
 
 export type SpeakerSelection = {
-  ids: number[],
+  ids: number[]
   keepSelection: boolean
 }

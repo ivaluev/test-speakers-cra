@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { PropsDisabled } from '../types';
+import styled from '@emotion/styled'
+import {PropsDisabled} from '../types'
 
 export const Button = styled.button<Partial<PropsDisabled>>`
   white-space: nowrap;
@@ -9,8 +9,8 @@ export const Button = styled.button<Partial<PropsDisabled>>`
   height: 24px;
   margin: 0;
   padding: 0 16px;
-  cursor: ${props => props.disabled ? 'initial' : 'pointer'};
-  opacity: ${props => props.disabled ? '0.5' : 'initial'};
+  cursor: ${props => (props.disabled ? 'initial' : 'pointer')};
+  opacity: ${props => (props.disabled ? '0.5' : 'initial')};
   transition: color 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
   text-decoration: none;
   border: 0;
@@ -23,6 +23,6 @@ export const Button = styled.button<Partial<PropsDisabled>>`
   background-color: #008eff;
   box-shadow: none;
   &:hover {
-    background-color: ${props => props.disabled ? '#008eff' : '#007ee5'}; 
+    background-color: ${props => (props.disabled ? '#008eff' : '#007ee5')};
   }
-`;
+`

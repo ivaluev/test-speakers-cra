@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 
 export const Label = styled.span`
   display: inline-block;
@@ -6,4 +6,4 @@ export const Label = styled.span`
   background-color: darkgray;
   color: white;
   border-radius: 3px;
-`;
+`

@@ -1,11 +1,9 @@
-import React from 'react';
-import ButtonCStop from './button-c-stop';
-import { action } from '@storybook/addon-actions';
-
+import {action} from '@storybook/addon-actions'
+import ButtonCStop from './button-c-stop'
 
 export default {
   title: 'Button-C-Stop',
-  component: ButtonCStop
-};
+  component: ButtonCStop,
+}
 
-export const Normal = () => <ButtonCStop onClick={action('clicked')} />;
+export const Normal = () => <ButtonCStop onClick={action('clicked')} />
