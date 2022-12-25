@@ -1,9 +1,7 @@
-import React from 'react';
-import { PropsSelected, PropsDelay } from '../../types';
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { lighten, darken } from 'polished';
-import { keyframes } from '@emotion/core';
-import { PropsOnClick } from '../../common/types';
+import { darken,lighten } from 'polished';
+
 
 const COL_1 = '#0099ff';
 const COL_2 = '#d0e7f6';

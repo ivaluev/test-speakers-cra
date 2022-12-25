@@ -1,12 +1,11 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import useMouseClickAndMoveObserver from '../../utils/useMouseClickAndMoveObserver';
-import React, { useRef, useEffect } from 'react';
-import { SpeakerRectInfo } from './speakers';
-import { isInside } from '../../utils/intersection';
+
 import { useDispatch } from 'react-redux';
 import { actionSpeakersSelect } from '../../store/speakers/actions';
 import { MouseEventType } from '../../types';
+import { isInside } from '../../utils/intersection';
+import useMouseClickAndMoveObserver from '../../utils/useMouseClickAndMoveObserver';
+import { SpeakerRectInfo } from './speakers';
 
 export interface SelectionRectProps {
   speakersRectInfo: SpeakerRectInfo[];

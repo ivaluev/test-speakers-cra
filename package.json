@@ -10,7 +10,8 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint-fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "pretty": "prettier --end-of-line auto -w \"**/*.{js,ts,jsx,tsx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -42,10 +43,10 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.24",
     "@types/react-transition-group": "^4.4.5",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.9.4",
     "prettier": "^2.8.1",
-    "prettier-plugin-organize-imports": "^3.2.1"
+    "prettier-plugin-organize-imports": "^3.2.1",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.4"
   },
   "browserslist": {
     "production": [
